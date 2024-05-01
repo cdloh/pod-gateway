@@ -97,7 +97,7 @@ EOF
 if [[ -z "$NAT_ENTRY" ]]; then
   echo "Get dynamic IP"
   # cleanup old processes if they exist
-  pkill dhclient
+  killall -q dhclient || true
   dhclient -v -cf /etc/dhclient.conf vxlan0
 else
   IP=$(cut -d' ' -f2 <<< "$NAT_ENTRY")
